@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Uncomment and your base-package here:
+         <context:component-scan
+            base-package="org.springframework.samples.web"/>  -->
+
+
+    <mvc:annotation-driven />
+   	<mvc:resources location="WEB-INF/resources/" mapping="/resources/**"/>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+	        <property name="prefix" value="/WEB-INF/view/"/>
+	        <property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<context:component-scan base-package="mvc.controller"/>
+	<context:component-scan base-package="mvc.services"/>
+	<context:component-scan base-package="mvc.repository"/>
+	
+	<bean class="mvc.util.DBCPInit" init-method="init">
+		<property name="JDBC_DRIVER_CLASS">
+			<value>com.mysql.cj.jdbc.Driver</value>
+		</property>
+		<property name="JDBC_URL">
+			<value>jdbc:mysql://localhost:3306/simple_board?serverTimezone=UTC</value>
+		</property>
+		<property name="JDBC_USER">
+			<value>root</value>
+		</property>
+		<property name="JDBC_PASSWORD">
+			<value>SystemManager402</value>
+		</property>
+		<property name="JDBC_DB_NAME">
+			<value>simple_board</value>
+		</property>
+	
+	</bean>
+
+</beans>
